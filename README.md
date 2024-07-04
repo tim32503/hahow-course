@@ -1,24 +1,14 @@
-# README
+# 系統需求
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Ruby 3.2.2
+- Rails 7.1.3
+- Postgresql
 
-Things you may want to cover:
+# 題目
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [ ] 我們該如何執行這個 server
+- [ ] 專案的架構，API server 的架構邏輯
+- [ ] 你對於使用到的第三方 Gem 的理解，以及他們的功能簡介
+- [ ] 你在程式碼中寫註解的原則，遇到什麼狀況會寫註解
+- [ ] 當有多種實作方式時，請說明為什麼你會選擇此種方式
+- [ ] 在這份專案中你遇到的困難、問題，以及解決的方法

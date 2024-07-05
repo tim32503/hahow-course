@@ -43,6 +43,31 @@
 
 ```
 
+### 特定課程詳細資訊
+提供使用者取得指定「課程」的資訊，其中包含課程中的「章節」資訊和「單元」資訊。
+
+將下方程式碼貼至 GraphiQL 頁面中白色區塊後執行，即可得到完整課程資訊。
+```GraphQL
+{
+  course(id: 1) {
+    id
+    name
+    lecturerName
+    description
+    chapters {
+      id
+      name
+      units {
+        id
+        name
+      }
+    }
+  }
+}
+
+```
+
+
 # 題目
 
 - [ ] 我們該如何執行這個 server

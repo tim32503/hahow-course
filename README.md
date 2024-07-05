@@ -36,6 +36,8 @@
       units {
         id
         name
+        description
+        content
       }
     }
   }
@@ -60,6 +62,8 @@
       units {
         id
         name
+        description
+        content
       }
     }
   }

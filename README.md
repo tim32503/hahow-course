@@ -71,6 +71,53 @@
 
 ```
 
+### 建立課程
+
+請設計一個 API 提供使用者建立「課程」與課程中的「章節」和「單元」。
+
+- [ ] 「課程」、「章節」和「單元」需要同時被建立
+- [ ] 需要驗證使用者的輸入並在儲存失敗時回傳錯誤訊息
+- [ ] 需要儲存「章節」和「單元」的順序
+
+```
+mutation add{
+  createCourse(input: {
+		input: {
+      name: "課堂 4",
+			lecturerName: "Hahow",
+      chapters: [
+        {
+          name: "課堂 4 的章節 1",
+          units: [
+            {
+              name: "課堂 4 - 章節 1 - 單元 1",
+              content: "課堂 4 - 章節 1 - 單元 2"
+            }
+          ]
+        }
+      ]
+    }
+  }){
+    course {
+      id
+      name
+      lecturerName
+      description
+      chapters {
+        id
+        name
+        units {
+          id
+          name
+          description
+          content
+        }
+      }
+    }
+  }
+}
+```
+
 
 # 題目
 

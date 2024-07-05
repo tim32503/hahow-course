@@ -4,6 +4,45 @@
 - Rails 7.1.3
 - Postgresql
 
+# 操作說明
+
+## 本機端
+
+1. 下載此專案後，請先依序執行下列指令
+  ```
+  bundle install
+  rails db:create
+  rails db:migrate
+  rails s
+  ```
+2. 接著進入 http://localhost:3000/graphiql ，我們可透過此頁面來測試 API。
+
+## API 測試
+
+### 課程列表
+提供使用者取得系統中所有「課程」的資訊，其中包含課程中的「章節」資訊和「單元」資訊。
+
+將下方程式碼貼至 GraphiQL 頁面中白色區塊後執行，即可得到完整課程資訊。
+```GraphQL
+{
+  courses {
+    id
+    name
+    lecturerName
+    description
+    chapters {
+      id
+      name
+      units {
+        id
+        name
+      }
+    }
+  }
+}
+
+```
+
 # 題目
 
 - [ ] 我們該如何執行這個 server

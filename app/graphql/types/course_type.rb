@@ -6,5 +6,10 @@ module Types
     field :name, String, null: false
     field :lecturer_name, String, null: false
     field :description, String, null: true
+    field :chapters, [Types::ChapterType], null: true
+
+    def chapters
+      object.chapters
+    end
   end
 end

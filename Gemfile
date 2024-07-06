@@ -46,11 +46,13 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem 'image_processing', '~> 1.2'
 
+gem 'graphiql-rails'
 gem 'graphql', '~> 2.3', '>= 2.3.7'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
+  gem 'dockerfile-rails', '>= 1.6'
   gem 'rspec-rails', '~> 6.1', '>= 6.1.3'
 end
 
@@ -71,4 +73,3 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 6.2'
 end
-gem "graphiql-rails", group: :development

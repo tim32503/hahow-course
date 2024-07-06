@@ -118,6 +118,55 @@ mutation add{
 }
 ```
 
+### 編輯課程
+
+請設計一個 API 提供使用者編輯「課程」與課程中的「章節」和「單元」。
+
+- [ ] 需要驗證使用者的輸入並在儲存失敗時回傳錯誤訊息
+- [ ] 「章節」和「單元」的順序都可以被調整
+
+```
+mutation {
+  updateCourse(input: {
+		input: {
+      id: 5,
+      name: "課堂 4 (修改後)",
+			lecturerName: "Hahow",
+      chapters: [
+        {
+          id: 6,
+          name: "課堂 4 的章節 1 (測試)",
+          units: [
+            {
+              id: 8,
+              name: "課堂 4 - 章節 1 - 單元 1（修改後的修改後）",
+              content: "這堂我們不上課！"
+            }
+          ]
+        }
+      ]
+    }
+  }){
+    course {
+      id
+      name
+      lecturerName
+      description
+      chapters {
+        id
+        name
+        units {
+          id
+          name
+          description
+          content
+        }
+      }
+    }
+  }
+}
+```
+
 
 # 題目
 

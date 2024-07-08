@@ -13,7 +13,7 @@ module Mutations
       ActiveRecord::Base.transaction do
         course = Course.find(id)
 
-        return { success: true } if course.destroy
+        return { success: true, errors: nil } if course.destroy
 
         { success: false, errors: course.errors.full_messages }
       rescue ActiveRecord::RecordNotFound => e

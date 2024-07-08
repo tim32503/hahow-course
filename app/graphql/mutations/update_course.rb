@@ -7,36 +7,30 @@ module Mutations
 
     # 回傳結果
     field :course, Types::CourseType, null: true
-    field :errors, [String], null: false
+    field :errors, [String], null: true
 
     def resolve(input:)
       course = Course.find(input[:id])
-      course.update!(name: input[:name], description: input[:description], lecturer_name: input[:lecturer_name])
+      course.update!(input.to_h)
 
       if input[:chapters].present?
         input[:chapters]&.each do |chapter_input|
           chapter = course.chapters.find(chapter_input[:id])
-          chapter.update!(name: chapter_input[:name])
+          chapter.update!(chapter_input.to_h)
 
           if chapter_input[:units].present?
             chapter_input[:units]&.each do |unit_input|
               unit = chapter.units.find(unit_input[:id])
-              unit.update!(
-                name: unit_input[:name],
-                description: unit_input[:description],
-                content: unit_input[:content]
-              )
+              unit.update!(unit_input.to_h)
             end
           end
         end
       end
 
-      if course.save
-        { course: course, errors: [] }
-      else
-        { course: nil, errors: course.errors.full_messages }
-      end
-    rescue ActiveRecord::RecordNotFound => e
+      course.save!
+
+      { course: course, errors: nil }
+    rescue StandardError => e
       { course: nil, errors: [e.message] }
     end
   end

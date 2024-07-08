@@ -16,7 +16,7 @@ RSpec.describe '新增課程 API', type: :request do
       expect(json['errors']).to be_nil
     end
 
-    it '新增課程失敗' do
+    it '因 GraphQL 驗證參數失敗，新增課程失敗' do
       post '/graphql', params: { query: bad_mutation }
 
       json = JSON.parse(response.body)

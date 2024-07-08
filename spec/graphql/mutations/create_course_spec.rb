@@ -59,12 +59,12 @@ RSpec.describe '新增課程 API', type: :request do
         json = JSON.parse(response.body)
         data = json['data']['createCourse']['course']
 
-        expect(data['chapters'][0]).to include('sequence' => 2)
-        expect(data['chapters'][1]).to include('sequence' => 1)
+        expect(data['chapters'][0]).to include('sequence' => 1)
+        expect(data['chapters'][1]).to include('sequence' => 2)
 
-        expect(data['chapters'][0]['units'][0]).to include('sequence' => 3)
-        expect(data['chapters'][0]['units'][1]).to include('sequence' => 1)
-        expect(data['chapters'][0]['units'][2]).to include('sequence' => 2)
+        expect(data['chapters'][1]['units'][0]).to include('sequence' => 1)
+        expect(data['chapters'][1]['units'][1]).to include('sequence' => 2)
+        expect(data['chapters'][1]['units'][2]).to include('sequence' => 3)
       end
     end
   end

@@ -6,4 +6,6 @@ class Chapter < ApplicationRecord
   has_many :units, dependent: :destroy
 
   validates :name, presence: true
+
+  default_scope { order(sequence: :asc) }
 end

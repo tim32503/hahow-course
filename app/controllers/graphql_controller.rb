@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 class GraphqlController < ApplicationController
+  # 因目前專案僅提供測試使用，為方便測試，先跳過 CSRF 驗證處理
   skip_before_action :verify_authenticity_token
-  # If accessing from outside this domain, nullify the session
-  # This allows for outside API access while preventing CSRF attacks,
-  # but you'll have to authenticate your user separately
-  # protect_from_forgery with: :null_session
 
   def execute
     variables = prepare_variables(params[:variables])

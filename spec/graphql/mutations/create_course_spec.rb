@@ -52,6 +52,20 @@ RSpec.describe '新增課程 API', type: :request do
         expect(data).to be_present
         expect(data).to eq(["Validation failed: Name can't be blank"])
       end
+
+      it '需要儲存章節和單元的順序' do
+        post '/graphql', params: { query: full_mutation_with_sequence }
+
+        json = JSON.parse(response.body)
+        data = json['data']['createCourse']['course']
+
+        expect(data['chapters'][0]).to include('sequence' => 2)
+        expect(data['chapters'][1]).to include('sequence' => 1)
+
+        expect(data['chapters'][0]['units'][0]).to include('sequence' => 3)
+        expect(data['chapters'][0]['units'][1]).to include('sequence' => 1)
+        expect(data['chapters'][0]['units'][2]).to include('sequence' => 2)
+      end
     end
   end
 end

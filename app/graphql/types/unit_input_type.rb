@@ -6,5 +6,6 @@ module Types
     argument :name, String, required: true
     argument :description, String, required: false
     argument :content, String, required: true
+    argument :sequence, Integer, required: false
   end
 end

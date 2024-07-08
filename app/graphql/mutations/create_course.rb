@@ -11,26 +11,13 @@ module Mutations
 
     def resolve(input:)
       ActiveRecord::Base.transaction do
-        course = Course.new(
-          name: input[:name],
-          lecturer_name: input[:lecturer_name],
-          description: input[:description]
-        )
-
-        # 若課程建立失敗，回傳錯誤訊息
-        course.save!
+        course = Course.create!(input.to_h.except(:chapters))
 
         input[:chapters]&.each do |chapter_input|
-          chapter = course.chapters.create!(
-            name: chapter_input[:name]
-          )
+          chapter = course.chapters.create!(chapter_input.to_h.except(:units))
 
           chapter_input[:units]&.each do |unit_input|
-            chapter.units.create!(
-              name: unit_input[:name],
-              description: unit_input[:description],
-              content: unit_input[:content]
-            )
+            chapter.units.create!(unit_input.to_h)
           end
         end
 

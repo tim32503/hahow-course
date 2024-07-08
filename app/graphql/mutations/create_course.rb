@@ -7,7 +7,7 @@ module Mutations
 
     # 回傳結果
     field :course, Types::CourseType, null: true
-    field :errors, [String], null: false
+    field :errors, [String], null: true
 
     def resolve(input:)
       ActiveRecord::Base.transaction do
@@ -18,7 +18,7 @@ module Mutations
         )
 
         # 若課程建立失敗，回傳錯誤訊息
-        raise ActiveRecord::Rollback unless course.save
+        course.save!
 
         input[:chapters]&.each do |chapter_input|
           chapter = course.chapters.create!(
@@ -35,7 +35,7 @@ module Mutations
         end
 
         { course: course }
-      rescue ActiveRecord::RecordInvalid => e
+      rescue StandardError => e
         # 當發生異常時，回傳錯誤訊息
         { course: nil, errors: [e.message] }
       end

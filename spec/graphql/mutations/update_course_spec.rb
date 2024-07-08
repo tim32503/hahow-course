@@ -29,5 +29,15 @@ RSpec.describe '更新課程 API', type: :request do
       expect(data['errors']).to be_present
       expect(data['errors']).to eq(["Validation failed: Name can't be blank"])
     end
+
+    it '章節和單元的順序都可以被調整' do
+      chapter2 = create(:chapter, sequence: 2, course: course)
+
+      expect {
+        post '/graphql', params: {
+          query: change_sequence_mutation(course_id: course.id, chapter_id: chapter2.id, new_chapter_sequence: 5)
+        }
+      }.to change { chapter2.reload.sequence }.from(2).to(5)
+    end
   end
 end

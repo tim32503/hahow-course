@@ -11,19 +11,15 @@ module Mutations
 
     def resolve(input:)
       course = Course.find(input[:id])
-      course.update!(input.to_h)
+      course.update!(input.to_h.except(:chapters))
 
-      if input[:chapters].present?
-        input[:chapters]&.each do |chapter_input|
-          chapter = course.chapters.find(chapter_input[:id])
-          chapter.update!(chapter_input.to_h)
+      input[:chapters]&.each do |chapter_input|
+        chapter = course.chapters.find(chapter_input[:id])
+        chapter.update!(chapter_input.to_h.except(:units))
 
-          if chapter_input[:units].present?
-            chapter_input[:units]&.each do |unit_input|
-              unit = chapter.units.find(unit_input[:id])
-              unit.update!(unit_input.to_h)
-            end
-          end
+        chapter_input[:units]&.each do |unit_input|
+          unit = chapter.units.find(unit_input[:id])
+          unit.update!(unit_input.to_h)
         end
       end
 
